@@ -1,0 +1,24 @@
+.logoutBtn {
+  color: white;
+  cursor: pointer;
+  background-color: #0773fd;
+  line-height: normal;
+  margin: 18px 3% 0 0;
+  padding: 7px 17px;
+  font-weight: 100;
+  border: transparent;
+  // border-radius: 3px;
+  font-size: 16px;
+  text-decoration: one;
+  text-transform: uppercase;
+  border-radius: 0;
+  &:hover {
+    background-color: #2784fc;
+  }
+  float: right;
+  font-family: Arial, sans-serif;
+}
+
+.App-title {
+  color: white;
+}
