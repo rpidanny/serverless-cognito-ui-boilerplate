@@ -93,7 +93,7 @@ class Members extends Component {
   uploadProfilePicture (e) {
     const file = e.target.files[0]
     console.log(file)
-    Storage.put(file.name, file, {
+    Storage.put(`uploads/${file.name}`, file, {
       contentType: 'image/png'
     })
       .then(res => {
