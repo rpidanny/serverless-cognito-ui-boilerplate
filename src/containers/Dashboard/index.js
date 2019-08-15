@@ -1,3 +1,4 @@
+/* global alert */
 import React, { Component } from 'react'
 import Amplify, { Auth, API } from 'aws-amplify'
 import { withAuthenticator } from 'aws-amplify-react'
