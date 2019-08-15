@@ -27,3 +27,8 @@ src/config/cognito.js
 src/assets
 .vscode
 src/federatedConfig.js
+
+scripts/test.sh
+scripts/config.js
+
+buildspec.yml
