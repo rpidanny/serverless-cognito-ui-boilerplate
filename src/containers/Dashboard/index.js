@@ -1,6 +1,6 @@
 /* global alert */
 import React, { Component } from 'react'
-import Amplify, { Auth, API } from 'aws-amplify'
+import Amplify, { Auth, API, Storage } from 'aws-amplify'
 import { withAuthenticator } from 'aws-amplify-react'
 
 import logo from '../../assets/images/logo.svg'
@@ -35,16 +35,34 @@ class Members extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      user: undefined
+      user: undefined,
+      userAttributes: undefined,
+      profilePic: undefined
     }
 
+    Storage.configure({ level: 'private' })
+
+    this.inputElement = null
     this.logout = this.logout.bind(this)
+    this.uploadProfilePicture = this.uploadProfilePicture.bind(this)
+    this.updateProfilePicture = this.updateProfilePicture.bind(this)
+    this.deleteProfilePicture = this.deleteProfilePicture.bind(this)
   }
 
   async componentWillMount () {
     try {
-      const user = await Auth.currentUserInfo()
-      this.setState({ user })
+      // const user = await Auth.currentUserInfo()
+      const user = await Auth.currentAuthenticatedUser()
+      const userAttributes = await Auth.userAttributes(user)
+      const picture = userAttributes.find(attr => attr.Name === 'picture')
+
+      const profilePic = picture ? await Storage.get(picture.Value) : null
+
+      console.log('User', user)
+      console.log('Attributes', userAttributes)
+      console.log('ProfilePicture', profilePic)
+
+      this.setState({ user, profilePic })
     } catch (e) {
       console.log(e)
     }
@@ -72,22 +90,96 @@ class Members extends Component {
       })
   }
 
-  render () {
+  uploadProfilePicture (e) {
+    const file = e.target.files[0]
+    console.log(file)
+    Storage.put(file.name, file, {
+      contentType: 'image/png'
+    })
+      .then(res => {
+        return Auth
+          .updateUserAttributes(this.state.user, {
+            picture: res.key
+          })
+          .then((r) => {
+            console.log(r)
+            return Storage.get(res.key)
+          })
+      })
+      .then(this.updateProfilePicture)
+      .catch(err => console.log(err))
+  }
+
+  deleteProfilePicture () {
     const { user } = this.state
-    console.log(user)
+    Auth
+      .updateUserAttributes(user, {
+        picture: ''
+      })
+      .then(() => this.updateProfilePicture(null))
+      .then(console.log)
+  }
+
+  updateProfilePicture (e) {
+    this.setState({
+      profilePic: e
+    })
+  }
+
+  render () {
+    const { user, profilePic } = this.state
     return (
       <div className='App'>
         <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
+          <img
+            className={profilePic ? 'Profile-pic' : 'App-logo'}
+            src={profilePic || logo}
+            alt={profilePic ? 'Profile Picture' : 'Logo'}
+          />
           <h1 className='App-title'>Welcome, { user && user.username}</h1>
-          <h5 className='App-title'>{user && user.attributes.email}</h5>
+          <button
+            className='button'
+            onClick={() => {
+              this.inputElement.click()
+            }}
+          >
+            Update Image
+          </button>
+          {
+            (() => {
+              if (profilePic) {
+                return (
+                  <button
+                    className='button'
+                    onClick={this.deleteProfilePicture}
+                  >
+                    Remove Image
+                  </button>
+                )
+              }
+            })()
+          }
+          <button
+            className='button'
+            onClick={this.testApi}>
+            Test API
+          </button>
+          <button
+            className='button'
+            onClick={this.logout}>
+            Log Out
+          </button>
+          <input
+            className='file-upload-input'
+            type='file'
+            ref={input => {
+              this.inputElement = input
+            }}
+            onChange={this.uploadProfilePicture}
+            accept='image/*'
+          />
           <p className='App-intro'>
             To get started, edit <code>src/containers/Members/index.js</code> and save to reload.
-          </p>
-          <p>
-            <button className='logoutBtn' onClick={this.testApi}>
-              Test API
-            </button>
           </p>
         </header>
       </div>
@@ -97,7 +189,7 @@ class Members extends Component {
 
 export default withAuthenticator(Members, {
   // Render a sign out button once logged in
-  includeGreetings: true,
+  // includeGreetings: true,
   signUpConfig,
   theme: amplifyCustomTheme,
   federated: federatedConfig
