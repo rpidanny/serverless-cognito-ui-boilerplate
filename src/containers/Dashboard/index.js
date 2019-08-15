@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Amplify, { Auth } from 'aws-amplify'
+import Amplify, { Auth, API } from 'aws-amplify'
 import { withAuthenticator } from 'aws-amplify-react'
 
 import logo from '../../assets/images/logo.svg'
@@ -60,6 +60,17 @@ class Members extends Component {
     }
   }
 
+  async testApi () {
+    API.get('api', '/test')
+      .then(res => {
+        console.log(res)
+        alert(res.message)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   render () {
     const { user } = this.state
     console.log(user)
@@ -73,8 +84,8 @@ class Members extends Component {
             To get started, edit <code>src/containers/Members/index.js</code> and save to reload.
           </p>
           <p>
-            <button className='logoutBtn' onClick={this.logout}>
-              Logout
+            <button className='logoutBtn' onClick={this.testApi}>
+              Test API
             </button>
           </p>
         </header>
