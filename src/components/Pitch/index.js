@@ -4,7 +4,7 @@ import './index.css'
 
 const Pitch = () => {
   return (
-    <div class='section-pitch'>
+    <div className='section-pitch'>
       <h1>Serverless Website</h1>
       <p>Cognito authenticated React App</p>
       <button onClick={() => {

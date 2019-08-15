@@ -4,7 +4,7 @@ import './index.css'
 
 const MainNav = () => {
   return (
-    <div class='main-nav'>
+    <div className='main-nav'>
       <button onClick={() => {
         window.location = '/dashboard'
       }}>
