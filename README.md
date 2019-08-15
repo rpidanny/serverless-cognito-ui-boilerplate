@@ -5,9 +5,17 @@ A supporting client app for [serverless-cognito-boilerplate](https://github.com/
 ## Usage
 
 - `npm i`
-- Copy `src/config.example.js` to `src/config.js`
-- Edit `src/config.js` with your project credentials.
+- Copy `src/config/cognito.example.js` to `src/config/cognito.js`
+- Edit `src/config/cognito.js` with your project credentials.
 - `npm start`
+
+### Federated Identities
+
+#### Google
+
+Create google client ID from [https://developers.google.com/identity/sign-in/web/sign-in](https://developers.google.com/identity/sign-in/web/sign-in).
+
+Then fill in the details in `src/config/cognito.js`
 
 ## Create React App
 

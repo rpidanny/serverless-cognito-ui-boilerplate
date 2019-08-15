@@ -22,7 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-config.js
+src/config/cognito.js
 *.css
 src/assets
 .vscode

@@ -4,27 +4,27 @@ import { withAuthenticator } from 'aws-amplify-react'
 
 import logo from '../../assets/images/logo.svg'
 import './index.css'
-import config from '../../config'
+import { awsConfig, signUpConfig, federatedConfig, amplifyCustomTheme } from '../../config/cognito'
 
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
-    region: config.cognito.REGION,
-    userPoolId: config.cognito.USER_POOL_ID,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID,
-    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+    region: awsConfig.cognito.REGION,
+    userPoolId: awsConfig.cognito.USER_POOL_ID,
+    identityPoolId: awsConfig.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: awsConfig.cognito.APP_CLIENT_ID
   },
   Storage: {
-    region: config.s3.REGION,
-    bucket: config.s3.BUCKET,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID
+    region: awsConfig.s3.REGION,
+    bucket: awsConfig.s3.BUCKET,
+    identityPoolId: awsConfig.cognito.IDENTITY_POOL_ID
   },
   API: {
     endpoints: [
       {
         name: 'api',
-        endpoint: config.apiGateway.URL,
-        region: config.apiGateway.REGION
+        endpoint: awsConfig.apiGateway.URL,
+        region: awsConfig.apiGateway.REGION
       }
     ]
   }
@@ -94,7 +94,10 @@ class Members extends Component {
 
 export default withAuthenticator(Members, {
   // Render a sign out button once logged in
-  // includeGreetings: true
+  includeGreetings: true,
+  signUpConfig,
+  theme: amplifyCustomTheme,
+  federated: federatedConfig
   // Show only certain components
   // authenticatorComponents: [MyComponents],
 })
