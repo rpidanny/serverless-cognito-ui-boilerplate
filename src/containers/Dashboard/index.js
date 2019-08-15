@@ -49,7 +49,7 @@ class Members extends Component {
     this.deleteProfilePicture = this.deleteProfilePicture.bind(this)
   }
 
-  async componentWillMount () {
+  async componentDidMount () {
     try {
       // const user = await Auth.currentUserInfo()
       const user = await Auth.currentAuthenticatedUser()
