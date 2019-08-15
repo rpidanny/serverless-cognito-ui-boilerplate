@@ -34,13 +34,10 @@ class Members extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      user: undefined,
-      collapsed: true,
-      selectedMenuKey: '1'
+      user: undefined
     }
 
     this.logout = this.logout.bind(this)
-    this.handleMenuSelect = this.handleMenuSelect.bind(this)
   }
 
   async componentWillMount () {
@@ -61,12 +58,6 @@ class Members extends Component {
     } catch (e) {
       console.log(e)
     }
-  }
-
-  handleMenuSelect (e) {
-    this.setState({
-      selectedMenuKey: e.key
-    })
   }
 
   render () {
