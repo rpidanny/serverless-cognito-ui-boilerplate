@@ -11,7 +11,7 @@ import Fallback from '../../components/Fallback'
 import './index.css'
 
 const LandingPage = lazy(() => import('../LandingPage'))
-const Members = lazy(() => import('../Members'))
+const Dashboard = lazy(() => import('../Dashboard'))
 
 function App () {
   return (
@@ -27,10 +27,10 @@ function App () {
           )}
         />
         <Route
-          path='/members'
+          path='/dashboard'
           render={props => (
             <Suspense fallback={<Fallback />} >
-              <Members {...props} />
+              <Dashboard {...props} />
             </Suspense>
           )}
         />

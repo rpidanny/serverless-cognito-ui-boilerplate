@@ -6,7 +6,7 @@ const MainNav = () => {
   return (
     <div class='main-nav'>
       <button onClick={() => {
-        window.location = '/members'
+        window.location = '/dashboard'
       }}>
         Sign In
       </button>

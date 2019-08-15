@@ -8,7 +8,7 @@ const Pitch = () => {
       <h1>Serverless Website</h1>
       <p>Cognito authenticated React App</p>
       <button onClick={() => {
-        window.location = '/members'
+        window.location = '/dashboard'
       }}>
         Join For Free
       </button>
