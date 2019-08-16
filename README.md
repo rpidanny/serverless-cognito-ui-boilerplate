@@ -1,5 +1,7 @@
 # serverless-cognito-ui-boilerplate
 
+[![Build Status](https://travis-ci.org/rpidanny/serverless-cognito-ui-boilerplate.svg?branch=master)](https://travis-ci.org/rpidanny/serverless-cognito-ui-boilerplate)
+
 A supporting client app for [serverless-cognito-boilerplate](https://github.com/rpidanny/serverless-cognito-boilerplate).
 
 ## Usage
