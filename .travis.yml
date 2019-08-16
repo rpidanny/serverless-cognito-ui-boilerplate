@@ -12,8 +12,8 @@ install:
   - npm install
 script:
   - ./scripts/generate-config.sh
-  - npm run build
   - npm test
+  - npm run build
 notifications:
   email:
     on_success: change
