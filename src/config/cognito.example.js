@@ -48,7 +48,7 @@ const awsConfig = {
   },
   apiGateway: {
     REGION: 'YOUR_REGION',
-    URL: 'YOUR_API_GATEWAY_URL'
+    URL: 'https://YOUR_API_GATEWAY_ID.execute-api.YOUR_REGION.amazonaws.com/dev'
   },
   cognito: {
     REGION: 'YOUR_REGION',
