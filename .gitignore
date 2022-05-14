@@ -1,34 +1,23 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Created by https://www.toptal.com/developers/gitignore/api/react
+# Edit at https://www.toptal.com/developers/gitignore?templates=react
 
-# testing
-/coverage
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
 
-# production
-/build
+node_modules
+bower_components
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.sublime*
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+psd
+thumb
+sketch
 
-src/config/cognito.js
-*.css
-src/assets
-.vscode
-src/federatedConfig.js
+# End of https://www.toptal.com/developers/gitignore/api/react
 
-scripts/test.sh
-scripts/config.js
-
-buildspec.yml
+src/config/amplify/amplify.config.ts

@@ -17,6 +17,11 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
       - name: Generate Config
         run: ./scripts/generate-config.sh
         env:
@@ -27,10 +32,14 @@ jobs:
           APP_CLIENT_ID: ${{ secrets.APP_CLIENT_ID }}
           IDENTITY_POOL_ID: ${{ secrets.IDENTITY_POOL_ID }}
 
-      - name: Install and Build 🔧
-        run: |
-          npm install
-          npm run build
+      - name: Install
+        run: npm ci
+
+      - name: Build 🔧
+        run: npm run build --if-present
+
+      - name: Test
+        run: npm test
         env:
           CI: true
 

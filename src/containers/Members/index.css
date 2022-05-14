@@ -8,30 +8,25 @@
   padding: 10px 10px;
   font-weight: 100;
   border: transparent;
-  // border-radius: 3px;
   font-size: 16px;
   text-decoration: one;
   text-transform: uppercase;
   border-radius: 0;
-  &:hover {
-    background-color: #2784fc;
-  }
   float: right;
-  font-family: Arial, sans-serif;
-}
+  font-family: Arial, sans-serif; }
+  .button:hover {
+    background-color: #2784fc; }
 
 .App-title {
-  color: white;
-}
+  color: white; }
+
 .App {
-  text-align: center;
-}
+  text-align: center; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
-  pointer-events: none;
-}
+  pointer-events: none; }
 
 .App-header {
   background-color: #282c34;
@@ -41,28 +36,22 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-}
+  color: white; }
 
 .App-link {
-  color: #61dafb;
-}
+  color: #61dafb; }
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
-  }
+    transform: rotate(0deg); }
   to {
-    transform: rotate(360deg);
-  }
-}
+    transform: rotate(360deg); } }
+
 .Profile-pic {
   height: 30vmin;
   pointer-events: none;
   object-fit: cover;
-  border-radius: 50%;
-}
+  border-radius: 50%; }
 
 .file-upload-input {
-  display: none;
-}
+  display: none; }

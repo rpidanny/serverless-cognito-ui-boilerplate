@@ -1,30 +1,26 @@
-name: 'CI'
+name: "CI"
 
 on:
   push:
     branches-ignore:
-      - 'main'
+      - "main"
 defaults:
   run:
     shell: bash
 
 jobs:
   Build:
-    name: 'Build / Test'
+    name: "Build / Test"
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
       - name: Clone Repo
         uses: actions/checkout@master
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
       - name: Generate Config
         run: ./scripts/generate-config.sh
@@ -35,11 +31,14 @@ jobs:
           USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
           APP_CLIENT_ID: ${{ secrets.APP_CLIENT_ID }}
           IDENTITY_POOL_ID: ${{ secrets.IDENTITY_POOL_ID }}
-      
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          npm test
+
+      - name: Install
+        run: npm ci
+
+      - name: Build 🔧
+        run: npm run build --if-present
+
+      - name: Test
+        run: npm test
         env:
           CI: true
