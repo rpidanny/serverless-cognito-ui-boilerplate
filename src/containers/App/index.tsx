@@ -1,5 +1,10 @@
 import React, { Suspense, lazy } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 import "./index.css";
 
@@ -10,26 +15,28 @@ const Members = lazy(() => import("../Members"));
 
 export function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Suspense fallback={<Fallback />}>
-            <LandingPage />
-          </Suspense>
-        }
-      />
+    <Router basename={process.env.PUBLIC_URL + "/"}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<Fallback />}>
+              <LandingPage />
+            </Suspense>
+          }
+        />
 
-      <Route
-        path="members"
-        element={
-          <Suspense fallback={<Fallback />}>
-            <Members />
-          </Suspense>
-        }
-      />
+        <Route
+          path="members"
+          element={
+            <Suspense fallback={<Fallback />}>
+              <Members />
+            </Suspense>
+          }
+        />
 
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
