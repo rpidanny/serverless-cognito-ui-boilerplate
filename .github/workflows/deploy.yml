@@ -17,11 +17,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
       - name: Generate Config
         run: ./scripts/generate-config.sh
         shell: sh
@@ -32,6 +27,11 @@ jobs:
           USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
           APP_CLIENT_ID: ${{ secrets.APP_CLIENT_ID }}
           IDENTITY_POOL_ID: ${{ secrets.IDENTITY_POOL_ID }}
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
 
       - name: Install
         run: npm ci
