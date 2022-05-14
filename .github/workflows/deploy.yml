@@ -24,6 +24,7 @@ jobs:
 
       - name: Generate Config
         run: ./scripts/generate-config.sh
+        shell: bash
         env:
           API_GATEWAY_ID: ${{ secrets.API_GATEWAY_ID }}
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
